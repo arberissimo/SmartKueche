@@ -6,48 +6,40 @@ namespace SmartKueche
 {
     public class Einkaufsliste
     {
-
-        List<Einkaufsliste> einkaufsliste;
         public void CreateEinkaufsliste(List<Einkaufsliste> EinkaufsListe)
         {
             Console.Clear();
 
-            for (int i = 1; i <= 15; i++)
+            Console.WriteLine("Wie soll die Einkaufsliste heissen?");
+            var nameEinkaufsliste = Console.ReadLine();
+
+            for (int i = 0; i < 15; i++)
             {
                 Console.Clear();
 
                 Console.WriteLine("Produkt: ");
                 var produkt = Console.ReadLine();
 
+                if (produkt.Equals("0"))
+                {
+                    break;
+                }
+
                 Console.WriteLine("Menge: ");
                 var menge = Console.ReadLine();
-                int mengeInt = Convert.ToInt16(menge);
 
                 Console.WriteLine("Preis: ");
                 var preis = Console.ReadLine();
-                int preisInt = Convert.ToInt16(preis);
-
-                int total = Console.Read();
-                total = preisInt * mengeInt;
 
                 var einkaufsliste = new Einkaufsliste()
                 {
+                    nameEinkaufsliste = nameEinkaufsliste,
                     Produkt = produkt,
-                    Menge = mengeInt,
-                    Preis = preisInt,
-                    Total = total
+                    Menge = menge,
+                    Preis = preis,
                 };
 
                 EinkaufsListe.Add(einkaufsliste);
-
-                var eingabe = Console.ReadLine();
-                int eingabeInt = Convert.ToInt32(eingabe);
-
-                if (eingabeInt == 0)
-                {
-                    this.einkaufsliste = EinkaufsListe;
-                    break;
-                }
             }
         }
 
@@ -57,17 +49,43 @@ namespace SmartKueche
 
             foreach (var einkaufsliste in EinkaufsListe)
             {
-                Console.WriteLine($"{einkaufsliste.Produkt}: {einkaufsliste.Menge}x\n{einkaufsliste.Preis}\nTotal: {einkaufsliste.Total}");
+                Console.WriteLine($"{einkaufsliste.nameEinkaufsliste}\n{einkaufsliste.Produkt}: {einkaufsliste.Menge}Stk. à {einkaufsliste.Preis}.-\nTotal: {einkaufsliste.Total}");
+                Console.WriteLine("..................................................................");
             }
-
             Console.ReadKey();
         }
 
+        public void RelateEinkaufsliste(List<Einkaufsliste> EinkaufsListe)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Wählen Sie eine Liste: ");
+
+            int SelectedEinkaufslisteEdit;
+
+            for (int y = 0; y < EinkaufsListe.Count; y++)
+            {
+                Console.WriteLine($"[{y + 1}] {EinkaufsListe[y].nameEinkaufsliste}");
+            }
+            var SelectedEinkaufslisteEditBool = int.TryParse(Console.ReadLine(), out SelectedEinkaufslisteEdit);
+            if (SelectedEinkaufslisteEdit == 0)
+            {
+                return;
+            }
+            var chosenEinkaufslisteForEdit = EinkaufsListe[SelectedEinkaufslisteEdit - 1];
+            SelectedEinkaufslisteEdit = SelectedEinkaufslisteEdit - 1;
+
+            var SelectedFieldBool = int.TryParse(Console.ReadLine(), out var SelectedField);
+            if (SelectedField == 0)
+            {
+                return;
+            }
+        }
+
+        public String nameEinkaufsliste { get; set; }
         public String Produkt { get; set; }
-        public int Menge { get; set; }
-        public int Preis { get; set; }
-        public int Total { get; set; }
-
-
+        public String Menge { get; set; }
+        public String Preis { get; set; }
+        public String Total { get; set; }
     }
 }

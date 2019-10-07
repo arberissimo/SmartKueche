@@ -33,50 +33,79 @@ namespace SmartKueche
                     switch (hauptmenu)
                     {
                         case "a":
-                            Console.Clear();
-                            Console.WriteLine("Was möchten Sie machen?\n[a] Person erstellen\n[b] Person auflisten");
-                            var personMenu = Console.ReadLine();
-
-                            switch (personMenu)
+                            int looppersonMenu = 1;
+                            while (looppersonMenu == 1)
                             {
-                                case "a":
-                                    refPerson.CreatePerson(PersonenListe);
-                                    break;
-                                case "b":
-                                    refPerson.ListPerson(PersonenListe);
-                                    break;
+
+                            Console.Clear();
+                            Console.WriteLine("Was möchten Sie machen?\n[a] Person erstellen\n[b] Person auflisten\n[c] Person bearbeiten\n[d] Exit");
+                            var personMenu = Console.ReadLine();
+                            
+                                switch (personMenu)
+                                {
+                                    case "a":
+                                        refPerson.CreatePerson(PersonenListe);
+                                        break;
+                                    case "b":
+                                        refPerson.ListPerson(PersonenListe);
+                                        break;
+                                    case "c":
+                                        refPerson.EditPerson(PersonenListe);
+                                        break;
+                                    case "d":
+                                        looppersonMenu = 0;
+                                        break;
+                                }
                             }
                             break;
                         case "b":
+                            int loopeinkaufslisteMenu = 1;
+                            while (loopeinkaufslisteMenu == 1)
+                            {
+
                             Console.Clear();
-                            Console.WriteLine("Was möchten Sie machen?\n[a] Einkaufsliste erstellen\n[b] Einkaufsliste anzeigen");
+                            Console.WriteLine("Was möchten Sie machen?\n[a] Einkaufsliste erstellen\n[b] Einkaufsliste anzeigen\n[c] Einkaufsliste jemandem zuordnen\n[d] Exit");
                             var einkaufslisteMenu = Console.ReadLine();
 
-                            switch (einkaufslisteMenu)
-                            {
-                                case "a":
-                                    refEinkaufsliste.CreateEinkaufsliste(EinkaufsListe);
-                                    break;
-                                case "b":
-                                    refEinkaufsliste.ListEinkaufsliste(EinkaufsListe);
-                                    break;
-                            }
+                                switch (einkaufslisteMenu)
+                                {
+                                    case "a":
+                                        refEinkaufsliste.CreateEinkaufsliste(EinkaufsListe);
+                                        break;
+                                    case "b":
+                                        refEinkaufsliste.ListEinkaufsliste(EinkaufsListe);
+                                        break;
+                                    case "c":
+                                        refEinkaufsliste.RelateEinkaufsliste(EinkaufsListe);
+                                        break;
+                                    case "d":
+                                        loopeinkaufslisteMenu = 0;
+                                        break;
+                                }
+                            } 
                             break;
                         case "c":
+                            int loopbankkontoMenu = 1;
+                            while (loopbankkontoMenu == 1)
+                            {
+
                             Console.Clear();
-                            Console.WriteLine("Was möchten Sie machen?\n[a] Bankkonto verwalten");
+                            Console.WriteLine("Was möchten Sie machen?\n[a] Bankkonto verwalten\n[b] Exit");
                             var bankkontoMenu = Console.ReadLine();
 
-                            switch (bankkontoMenu)
-                            {
-                                case "a":
-                                    refBankkonto.BankkontoVerwalten();
-                                    break;
+                                switch (bankkontoMenu)
+                                {
+                                    case "a":
+                                        refBankkonto.BankkontoVerwalten();
+                                        break;
+                                    case "b":
+                                        loopbankkontoMenu = 0;
+                                        break;
+                                }
                             }
                             break;
                         case "d":
-                            i = 0;
-                            break;
+                            return;
                     }
                 }
             }
